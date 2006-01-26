@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+use strict;
+use Test::Standalone;
+
+main();
+
+sub main {
+    for my $file (@ARGV) {
+        print "$file has ", -s $file, " bytes\n";
+    }
+}
+
+=begin test
+
+use Test::More tests => 1;
+
+use File::Temp qw(tempfile); 
+use Test::Output;
+
+my($fh, $file) = tempfile();
+print $fh "123";
+close $fh;
+
+@ARGV = ($file);
+stdout_is(\&main, "$file has 3 bytes\n", "Test STDOUT");
+
+=end test

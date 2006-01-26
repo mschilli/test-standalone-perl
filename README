@@ -1,0 +1,24 @@
+######################################################################
+    Test::Standalone 0.01
+######################################################################
+
+NAME
+    Test::Standalone - blah blah blah
+
+SYNOPSIS
+        use Test::Standalone;
+
+DESCRIPTION
+    Test::Standalone blah blah blah.
+
+EXAMPLES
+      $ perl -MTest::Standalone -le 'print $foo'
+
+LEGALESE
+    Copyright 2005 by Mike Schilli, all rights reserved. This program is
+    free software, you can redistribute it and/or modify it under the same
+    terms as Perl itself.
+
+AUTHOR
+    2005, Mike Schilli <cpan@perlmeister.com>
+
