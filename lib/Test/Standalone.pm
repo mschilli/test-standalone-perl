@@ -121,8 +121,8 @@ test suite embedded between these POD directives:
 
 =head1 EXAMPLE
 
-If the following scripts gets called with one or more file names, it
-prints out the size of these files:
+If the following script gets called with one or more file names, it
+prints out the byte sizes of these files:
 
     $ script.pl /etc/passwd /etc/group
     /etc/passwd has 2900 bytes
@@ -139,7 +139,7 @@ suite gets executed:
 
 Here's the code. Note how it uses C<main()> to call the script's main
 code and how the test suite uses C<main()> and C<@ARGV> to run the 
-scripts with different arguments and to check its STDOUT output with
+script with different arguments and to check its STDOUT output with
 C<Test::Output>:
 
     use Test::Standalone;
@@ -157,19 +157,20 @@ C<Test::Output>:
     use Test::More tests => 2;
 
     use File::Temp qw(tempfile); 
-    use Test::Output;
-    use Test::Exception;
 
     my($fh, $file) = tempfile();
     print $fh "123";
     close $fh;
 
     @ARGV = ($file);
+    use Test::Output;
     stdout_is(\&main, "$file has 3 bytes\n", "Test STDOUT");
     is(-s $file, 3, "Check with -s");
 
     @ARGV = ("/tmp/does/not/exist");
-    throws_ok { main() } qr/No such file/, "Dies with non-existent files";
+    use Test::Exception;
+    throws_ok { main() } qr/No such file/, 
+              "Dies with non-existent files";
     
     =end test
 
@@ -178,20 +179,22 @@ the C<import> function in
 C<Test::Standalone>, which invokes a source
 filter on the main script. 
 
-<B>It is paramount that the main body of the 
+B<It is paramount that the main body of the 
 script is encapsulated in a function called C<main> and that C<main>
-gets called by the script at the beginning.</B>
+gets called by the script at the beginning.>
 
 The C<import> function checks if the C<--test> command line option was
 set. If not, it does nothing and lets the script resume its normal
-operations.
+operation.
 
 If C<--test> command line option is set, however, the source filter
 kicks in and extracts the test suite code embedded between the
-C<=begin test> and C<=end test> directives. Also, it rewrites the call
+C<=begin test> and C<=end test> directives.
+Also, it rewrites the call
 to C<main()> to C<Test::Standalone::test_run()>. This will run the test
 suite instead of the script.
 
+The test script runs in the C<main> namespace.
 Tests in the test suite are typically run by setting C<@ARGV> (therefore
 setting different command line parameters) and then running C<main()>
 to execute the script. The test suite can employ all kinds of test modules,
