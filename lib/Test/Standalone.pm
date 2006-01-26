@@ -4,7 +4,6 @@ package Test::Standalone;
 use strict;
 use warnings;
 use Filter::Util::Call;
-use Sysadm::Install;
 use Getopt::Std;
 
 my $CODE       = "";

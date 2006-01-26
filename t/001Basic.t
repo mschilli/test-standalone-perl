@@ -9,5 +9,9 @@ use strict;
 use Test::More qw(no_plan);
 BEGIN { use_ok('Test::Standalone') };
 
-ok(1);
-like("123", qr/^\d+$/);
+=begin test
+foo bar
+=end test
+=cut
+
+is(Test::Standalone::test_code, "foo bar\n", "Extract Test Code");
