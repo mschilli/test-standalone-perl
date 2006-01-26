@@ -17,7 +17,7 @@ SYNOPSIS
         ...
 
         # ==============================
-        # !/usr/bin/perl
+        #!/usr/bin/perl
         # ==============================
         use Test::Standalone;
 

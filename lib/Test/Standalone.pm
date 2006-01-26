@@ -78,7 +78,7 @@ Test::Standalone - Embed regression test suites in standalone scripts
     ...
 
     # ==============================
-    # !/usr/bin/perl
+    #!/usr/bin/perl
     # ==============================
     use Test::Standalone;
 
