@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 
-use strict;
 use Test::Standalone;
 use Getopt::Std;
 use Sysadm::Install qw(:all);
@@ -12,42 +11,29 @@ main();
 ###########################################
 sub main {
 ###########################################
-    getopts("t", \my %opts);
-
-    if($opts{t}) {
-        TestFilter::test_run();
-    }
-
    for my $file (@ARGV) {
-       if(-e $file) {
-           die "$file exists, $0 cowardly refuses to overwrite.";
-       }
-
-       open FILE ">$file" or die "Cannot open $file";
+       open FILE, ">$file" or die "Cannot open $file";
        print FILE "$0 was here!\n";
        close FILE;
    }
 }
 
-=begin testfilter
+=begin test
 
     # Test modules ...
 use Test::More tests => 1;
 use File::Temp qw(tempfile);
 
-    # Test utility routines ...
-sub slurp { open FILE "<$_[0]" or die; 
-            my $data = join '', <FILE>; 
-            close FILE;
-}
-
     # Tests ...
-my($fh, $file) = tempfile(CLEANUP => 1);
+my($fh, $file) = tempfile();
 @ARGV=($file);
-main();
-is(slurp($file), "$0 was here!", "single file");
 
-=end testfilter
+main();
+is(slurp($file), "$0 was here!\n", "single file");
+
+1;
+
+=end test
 
 __END__
 
