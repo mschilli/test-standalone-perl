@@ -11,7 +11,7 @@ my $IN_TEST    = 0;
 my $TEST_START = qr(^=begin test);
 my $TEST_END   = qr(^=end test);
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 ###########################################
 sub import {
@@ -47,7 +47,7 @@ sub test_run {
     my $code = "package main; " .
                Test::Standalone::test_code();
 
-    eval $code or die "eval failed: $!";
+    eval $code or die "eval failed: $@";
     exit 0;
 }
 

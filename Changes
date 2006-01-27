@@ -1,5 +1,8 @@
 ######################################################################
 Revision history for Perl extension Test::Standalone
 
+0.02  2006/01/27
+  (ms) Fixed eval error message
+
 0.01  2006/01/25
-      * Where it all began.
+  (ms) Where it all began.
