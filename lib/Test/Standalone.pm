@@ -45,7 +45,9 @@ sub filter {
 sub test_run {
 ###########################################
     my $code = "package main; " .
-               Test::Standalone::test_code();
+               Test::Standalone::test_code() . 
+               "\n1;";
+
 
     eval $code or die "eval failed: $@";
     exit 0;
