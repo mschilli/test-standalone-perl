@@ -31,3 +31,36 @@ is(-s $file, 3, "Check with -s");
 throws_ok { main() } qr/No such file/, "Dies with non-existent files";
 
 =end test
+
+__END__
+
+=head1 NAME
+
+    size - Test script with embedded test suite
+
+=head1 SYNOPSIS
+
+        # Normal operation
+    $ size filename ...
+
+        # Run regression test suite
+    $ size --test
+
+=head1 DESCRIPTION
+
+C<size> is a test script and has no real purpose but demonstrating
+how to embed a regression test suite into a standalone script using
+Test::Standalone.
+
+C<size> will determine the size of one or more files and print them.
+To run the regression test suite instead, call C<tagger --test>.
+
+=head1 LEGALESE
+
+Copyright 2006 by Mike Schilli, all rights reserved.
+This program is free software, you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+2005, Mike Schilli <cpan@perlmeister.com>
